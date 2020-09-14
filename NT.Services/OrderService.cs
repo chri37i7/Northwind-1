@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using NT.Entities;
 using NT.Entities.Models;
 using NT.Services.Base;
 
@@ -11,49 +11,37 @@ namespace NT.Services
     public class OrderService : ServiceBase
     {
         /// <summary>
-        /// Returns a list of all order objects.
+        /// Calls the endpoint to retrieve all orders available
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of orders </returns>
+        /// <exception cref="WebServiceException"></exception>
         public virtual async Task<List<Orders>> GetAllOrdersAsync()
         {
-            try
-            {
-                // Call the web API
-                string json = await CallWebApiAsync("http://10.143.74.234:5000/order/all");
+            // Call the web API
+            string json = await CallWebApiAsync("http://10.143.74.234:5000/order/all");
 
-                // Deserialize the JSON data into an object list
-                List<Orders> orderData = JsonConvert.DeserializeObject<List<Orders>>(json);
+            // Deserialize the JSON data into an object list
+            List<Orders> orderData = JsonConvert.DeserializeObject<List<Orders>>(json);
 
-                // Return the object list
-                return orderData;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            // Return the object list
+            return orderData;
         }
 
         /// <summary>
-        /// Returns a list of all order objects by ID.
+        /// Calls the endpoint to retrieve an order by its id
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An object of type <see cref="Orders"/></returns>
+        /// <exception cref="WebServiceException"></exception>
         public virtual async Task<Orders> GetOrderByIdAsync(string customerId)
         {
-            try
-            {
-                // Call the web API
-                string json = await CallWebApiAsync($"http://10.143.74.234:5000/order/{customerId}");
+            // Call the web API
+            string json = await CallWebApiAsync($"http://10.143.74.234:5000/order/{customerId}");
 
-                // Deserialize the JSON data into an object list
-                Orders order = JsonConvert.DeserializeObject<Orders>(json);
+            // Deserialize the JSON data into an object list
+            Orders order = JsonConvert.DeserializeObject<Orders>(json);
 
-                // Return the object list
-                return order;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            // Return the object list
+            return order;
         }
     }
 }

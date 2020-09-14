@@ -2,7 +2,6 @@ using NT.Entities.Models;
 using NT.Gui;
 using NT.Gui.ViewModels.Base;
 using NT.Services;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -26,6 +25,9 @@ namespace NT.ViewModels.ViewModels
         #endregion
 
         #region Properties
+        /// <summary>
+        /// The available shippers in the view
+        /// </summary>
         public virtual ObservableCollection<Shippers> Shippers
         {
             get
@@ -38,6 +40,9 @@ namespace NT.ViewModels.ViewModels
             }
         }
 
+        /// <summary>
+        /// The displayed orders in the view
+        /// </summary>
         public virtual ObservableCollection<Orders> Orders
         {
             get
@@ -50,6 +55,9 @@ namespace NT.ViewModels.ViewModels
             }
         }
 
+        /// <summary>
+        /// The selected order in the view
+        /// </summary>
         public virtual Orders SelectedOrder
         {
             get
@@ -65,36 +73,23 @@ namespace NT.ViewModels.ViewModels
 
         #region Methods
         /// <summary>
-        /// Loads all orders from the endpoint
+        /// Loads all orders from the web API
         /// </summary>
         protected override async Task LoadAllAsync()
         {
+            // Declare service object
             OrderService orderService = new OrderService();
+            // Get all orders from the API
             List<Orders> orders = await orderService.GetAllOrdersAsync();
+            // Replace collection without destroying it
             Orders.ReplaceWith(orders);
 
+            // Declare service object
             ShipperService shipperService = new ShipperService();
+            // Get all shippers from the API
             List<Shippers> shippers = await shipperService.GetAllShippersAsync();
+            // Replace collection without destroying it
             Shippers.ReplaceWith(shippers);
-        }
-
-        /// <summary>
-        /// Deletes an order
-        /// </summary>
-        private void DeleteOrder()
-        {
-            // Needs implementing
-            throw new NotImplementedException();
-
-        }
-        /// <summary>
-        ///  Adds an order
-        /// </summary>
-        private void AddOrder()
-        {
-            // Needs implementing
-            throw new NotImplementedException();
-
         }
         #endregion
     }

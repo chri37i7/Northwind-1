@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using NT.Entities.Models;
 using NT.Services.Base;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using NT.Entities;
 
 namespace NT.Services
 {
@@ -11,26 +11,20 @@ namespace NT.Services
     public class ShipperService : ServiceBase
     {
         /// <summary>
-        /// Returns a list of all order objects.
+        /// Calls the endpoint to retrieve all shippers available
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="List{T}"/> of <see cref="Shippers"/></returns>
+        /// <exception cref="WebServiceException"></exception>
         public virtual async Task<List<Shippers>> GetAllShippersAsync()
         {
-            try
-            {
-                // Call the web API
-                string json = await CallWebApiAsync("http://10.143.74.234:5000/shipper/all");
+            // Call the web API
+            string json = await CallWebApiAsync("http://10.143.74.234:5000/shipper/all");
 
-                // Deserialize the JSON data into an object list
-                List<Shippers> shipperData = JsonConvert.DeserializeObject<List<Shippers>>(json);
+            // Deserialize the JSON data into an object list
+            List<Shippers> shipperData = JsonConvert.DeserializeObject<List<Shippers>>(json);
 
-                // Return the object list
-                return shipperData;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            // Return the object list
+            return shipperData;
         }
     }
 }

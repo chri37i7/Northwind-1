@@ -23,6 +23,9 @@ namespace NT.ViewModels.ViewModels
         #endregion
 
         #region Properties
+        /// <summary>
+        /// The displayed products in the view
+        /// </summary>
         public ObservableCollection<Products> Products
         {
             get
@@ -35,6 +38,9 @@ namespace NT.ViewModels.ViewModels
             }
         }
 
+        /// <summary>
+        /// The Selectec Product in the view
+        /// </summary>
         public Products SelectedProduct
         {
             get
@@ -49,12 +55,17 @@ namespace NT.ViewModels.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Loads all products from the web API
+        /// </summary>
+        /// <returns></returns>
         protected override async Task LoadAllAsync()
         {
+            // Declare service object
             ProductService service = new ProductService();
-
+            // Get all products from the API
             List<Products> products = await service.GetAllProductsAsync();
-
+            // Replace collection without destroying it
             Products.ReplaceWith(products);
         } 
         #endregion

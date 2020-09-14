@@ -2,16 +2,18 @@
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using NT.Entities;
 
 namespace NT.Services.Base
 {
-    public class ServiceBase
+    public abstract class ServiceBase
     {
         /// <summary>
         /// Calls a given endpoint and returns a string with the retrieved json data
         /// </summary>
         /// <param name="url"></param>
-        /// <returns></returns>
+        /// <returns>A <see cref="string"/> containing JSON Data</returns>
+        /// <exception cref="WebServiceException"></exception>
         protected virtual async Task<string> CallWebApiAsync(string url)
         {
             try
@@ -27,7 +29,7 @@ namespace NT.Services.Base
                 string result;
 
                 // Get response from the website
-                using(HttpWebResponse response = (HttpWebResponse)await httpWebRequest.GetResponseAsync())
+                using(HttpWebResponse response = await httpWebRequest.GetResponseAsync() as HttpWebResponse)
                 {
                     // Read the response
                     using StreamReader sr = new StreamReader(response.GetResponseStream());
@@ -38,9 +40,9 @@ namespace NT.Services.Base
                 // Return the retrieved JSON data.
                 return result;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
-                throw;
+                throw new WebServiceException("An error occured while trying to access the endpoint.", ex);
             }
         }
     }

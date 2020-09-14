@@ -19,5 +19,10 @@ namespace NT.Gui
                 observableCollection.Add(item);
             }
         }
+
+        public static Exception GetOriginalException(this Exception ex)
+        {
+            return ex.InnerException == null ? ex : ex.InnerException.GetOriginalException();
+        }
     }
 }

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace NT.Gui.ViewModels.Base
 {
     /// <summary>
-    /// Base class for ViewModel classes
+    /// Base class for ViewModels
     /// </summary>
-    public class ViewModelBase : BindableBase
+    public abstract class ViewModelBase : BindableBase
     {
         #region Methods
         /// <summary>
-        /// Runs the <see cref="LoadAllAsync"/> method
+        /// Calls the <see cref="LoadAllAsync"/> method used to load all viewmodel data.
         /// </summary>
         public virtual async Task InitializeAsync()
         {
@@ -19,12 +18,9 @@ namespace NT.Gui.ViewModels.Base
         }
 
         /// <summary>
-        /// Loads data from the database
+        /// Loads all data from the database, and assigns it to the observable collections.
         /// </summary>
-        protected virtual Task LoadAllAsync()
-        {
-            throw new NotImplementedException();
-        }
+        protected abstract Task LoadAllAsync();      
         #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NT.Entities.Models;
 using NT.Services.Base;
-using System;
+using NT.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,49 +11,37 @@ namespace NT.Services
     public class ProductService : ServiceBase
     {
         /// <summary>
-        /// Returns a list of all product objects.
+        /// Calls the endpoint to retrieve all products available
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A <see cref="List{T}"/> of <see cref="Products"/></returns>
+        /// <exception cref="WebServiceException"></exception>
         public virtual async Task<List<Products>> GetAllProductsAsync()
         {
-            try
-            {
-                // Call the web API
-                string json = await CallWebApiAsync("http://10.143.74.234:5000/product/all");
+            // Call the web API
+            string json = await CallWebApiAsync("http://10.143.74.234:5000/product/all");
 
-                // Deserialize the JSON data into an object list
-                List<Products> orderData = JsonConvert.DeserializeObject<List<Products>>(json);
+            // Deserialize the JSON data into an object list
+            List<Products> orderData = JsonConvert.DeserializeObject<List<Products>>(json);
 
-                // Return the object list
-                return orderData;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            // Return the object list
+            return orderData;
         }
 
         /// <summary>
-        /// Returns a product by id
+        /// Calls the endpoint to retrieve a product by its id
         /// </summary>
-        /// <returns></returns>
+        /// <returns>An object of type <see cref="Products"/></returns>
+        /// <exception cref="WebServiceException"></exception>
         public virtual async Task<Products> GetProductByIdAsync(int productId)
         {
-            try
-            {
-                // Call the web API
-                string json = await CallWebApiAsync($"http://10.143.74.234:5000/product/{productId}");
+            // Call the web API
+            string json = await CallWebApiAsync($"http://10.143.74.234:5000/product/{productId}");
 
-                // Deserialize the JSON data into an object list
-                Products product = JsonConvert.DeserializeObject<Products>(json);
+            // Deserialize the JSON data into an object list
+            Products product = JsonConvert.DeserializeObject<Products>(json);
 
-                // Return the object list
-                return product;
-            }
-            catch(Exception)
-            {
-                throw;
-            }
+            // Return the object list
+            return product;
         }
     }
 }

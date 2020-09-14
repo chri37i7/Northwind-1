@@ -10,7 +10,6 @@ namespace NT.Gui
         public MainWindow()
         {
             InitializeComponent();
-            
         }
     }
 }
