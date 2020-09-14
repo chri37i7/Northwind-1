@@ -33,14 +33,14 @@ namespace NT.Tests
         {
             // Arrange
             OrderService service;
-            Orders order;
+            List<Orders> orders;
 
             // Act
             service = new OrderService();
-            order = await service.GetOrderByIdAsync("anton");
+            orders = await service.GetOrdersByIdAsync("anton");
 
             // Assert
-            Assert.IsNotNull(order);
+            Assert.IsNotNull(orders);
         }
         #endregion
 

@@ -14,7 +14,7 @@ namespace NT.DataAccess.Repositories
             return await context.Set<Orders>()
                 .Include("Customer")
                 .Include("OrderDetails")
-                .Where(o => o.CustomerId == customerId)
+                .Where(o => o.CustomerId.ToLower() == customerId.ToLower())
                 .ToListAsync();
         }
 
