@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace NT.Tests
 {
     [TestClass]
-    public class ServiceTest
+    public class ServiceTest 
     {
         #region Get All Orders Test
         [TestMethod]
