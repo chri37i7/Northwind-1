@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
 using Newtonsoft.Json;
-
 using NT.Entities;
 using NT.Entities.Models;
 using NT.Services.Base;
