@@ -42,7 +42,7 @@ namespace NT.Services.Base
             }
             catch(Exception ex)
             {
-                throw new WebServiceException("Der kunne ikke oprettes forbindelse til slutpunktet. Se den indre fejl for detaljer.", ex);
+                throw new WebServiceException("Der kunne ikke oprettes forbindelse til slutpunktet.", ex);
             }
         }
     }
