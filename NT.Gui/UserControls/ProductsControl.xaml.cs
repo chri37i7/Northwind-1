@@ -1,5 +1,6 @@
 ﻿using NT.ViewModels.ViewModels;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -42,11 +43,24 @@ namespace NT.Gui.UserControls
             }
             catch(Exception ex)
             {
-                // Get the exception which was originally thrown
-                Exception originalException = ex.GetOriginalException();
-
                 // Output error message
-                MessageBox.Show(originalException.Message, "Der opstod en fejl.", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Der opstod en fejl.", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                // Write error to a logging file, which will be created if it doesn't already exist.
+                using StreamWriter writer = File.AppendText($"{Directory.GetCurrentDirectory()}/log.txt");
+
+                // Get original Exception
+                Exception original = ex.GetOriginalException();
+
+                // Write exception to file
+                writer.Write(
+                    $"\nError Message: {ex.Message}\n" +
+                    $"Stacktrace:\n{ex.StackTrace}\n" +
+                    $"Source: {ex.Source}\n" +
+                    $"InnerException: {original.Message} \n" +
+                    $"Stracktrace\n{original.StackTrace}\n" +
+                    $"Source: {original.Source}\n" +
+                    $"Handler: OrdersControl.OnLoaded()");
             }
         }
     }

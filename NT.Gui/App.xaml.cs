@@ -30,7 +30,8 @@ namespace NT.Gui
                     $"Source: {e.Exception.Source}\n" +
                     $"InnerException: {original.Message} \n" +
                     $"Stracktrace\n{original.StackTrace}\n" +
-                    $"Source: {original.Source}\n");
+                    $"Source: {original.Source}\n" +
+                    $"Handler: App.App_DispatcherUnhandledException()");
             }
 
             // Prevent default unhandled exception processing
