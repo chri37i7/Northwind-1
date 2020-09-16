@@ -25,7 +25,7 @@ namespace NT.Logging
         /// </summary>
         private static void Configure()
         {
-            logFilePath = Directory.GetCurrentDirectory();
+            logFilePath = $"{Directory.GetCurrentDirectory()}/log.txt";
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace NT.Logging
         private static void WriteLog(string logMessage)
         {
             // Write error to a logging file, which will be created if it doesn't already exist.
-            using StreamWriter writer = File.AppendText($"{logFilePath}/log.txt");
+            using StreamWriter writer = File.AppendText(logFilePath);
             {
                 // Write message to file
                 writer.Write(
