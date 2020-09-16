@@ -50,7 +50,7 @@ namespace NT.Gui.UserControls
                 MessageBox.Show(ex.Message, "Der opstod en fejl.", MessageBoxButton.OK, MessageBoxImage.Error);
 
                 // Log Exception
-                Logger.Log(ex);
+                await Logger.LogAsync(ex);
             }
         }
     }

@@ -17,10 +17,10 @@ namespace NT.Gui
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        public async void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             // Log error
-            Logger.Log(e.Exception);
+            await Logger.LogAsync(e.Exception);
 
             // Prevent default unhandled exception processing
             e.Handled = true;

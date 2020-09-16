@@ -72,18 +72,18 @@ namespace NT.Logging
         /// </summary>
         /// <param name="ex"></param>
         /// <returns></returns>
-        public static async Task LogAsync(Exception ex)
+        public static async Task LogAsync(Exception exception)
         {
             // Get original Exception
-            Exception original = ex.GetOriginalException();
+            Exception innerException = exception.GetOriginalException();
 
             await WriteLogAsync(
-                $"Exception: {ex.Message}\n" +
-                $"Stacktrace:\n{ex.StackTrace}\n" +
-                $"Source: {ex.Source}\n" +
-                $"InnerException: {original.Message} \n" +
-                $"Stracktrace\n{original.StackTrace}\n" +
-                $"Source: {original.Source}\n");
+                $"Exception: {exception.Message}\n" +
+                $"Stacktrace:\n{exception.StackTrace}\n" +
+                $"Source: {exception.Source}\n" +
+                $"InnerException: {innerException.Message} \n" +
+                $"Stracktrace\n{innerException.StackTrace}\n" +
+                $"Source: {innerException.Source}\n");
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace NT.Logging
             // Append log message with a timestamp to the log file asynchronously
             await File.AppendAllTextAsync(
                 logFilePath,
-                $"[{DateTime.UtcNow}]\n" +
-                $"{logMessage}");
+                $"[{DateTime.Now}]\n" +
+                $"{logMessage}\n");
         }
     }
 }
