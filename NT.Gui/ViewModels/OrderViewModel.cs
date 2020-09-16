@@ -1,5 +1,5 @@
 using NT.Entities.Models;
-using NT.Gui;
+using NT.Utilities;
 using NT.Gui.ViewModels.Base;
 using NT.Services;
 using System.Collections.Generic;

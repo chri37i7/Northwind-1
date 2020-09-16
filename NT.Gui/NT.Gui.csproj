@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\NT.DataAccess\NT.DataAccess.csproj" />
     <ProjectReference Include="..\NT.Entities\NT.Entities.csproj" />
+    <ProjectReference Include="..\NT.Logging\NT.Logging.csproj" />
     <ProjectReference Include="..\NT.Services\NT.Services.csproj" />
     <ProjectReference Include="..\NT.Utilities\NT.Utilities.csproj" />
   </ItemGroup>
