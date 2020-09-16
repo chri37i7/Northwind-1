@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using NT.Utilities;
 
 namespace NT.Logging
@@ -24,7 +25,7 @@ namespace NT.Logging
         /// and assigns it to <see cref="logFilePath"/>
         /// </summary>
         private static void Configure()
-        {
+        {    
             logFilePath = $"{Directory.GetCurrentDirectory()}/log.txt";
         }
 
@@ -34,7 +35,18 @@ namespace NT.Logging
         /// <param name="message"></param>
         public static void Log(string message)
         {
+            // Log Message
             WriteLog(message);
+        }
+
+        /// <summary>
+        /// Logs a message asynchronously
+        /// </summary>
+        /// <param name="message"></param>
+        public static async Task LogAsync(string message)
+        {
+            // Log Message
+            await WriteLogAsync(message);
         }
 
         /// <summary>
@@ -56,20 +68,50 @@ namespace NT.Logging
         }
 
         /// <summary>
+        /// Logs an exception asynchronously
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        public static async Task LogAsync(Exception ex)
+        {
+            // Get original Exception
+            Exception original = ex.GetOriginalException();
+
+            await WriteLogAsync(
+                $"Exception: {ex.Message}\n" +
+                $"Stacktrace:\n{ex.StackTrace}\n" +
+                $"Source: {ex.Source}\n" +
+                $"InnerException: {original.Message} \n" +
+                $"Stracktrace\n{original.StackTrace}\n" +
+                $"Source: {original.Source}\n");
+        }
+
+        /// <summary>
         /// Logs the <see cref="string"/> parameter value
         /// to the logging file in <see cref="logFilePath"/>
         /// </summary>
         /// <param name="logMessage"></param>
         private static void WriteLog(string logMessage)
         {
-            // Write error to a logging file, which will be created if it doesn't already exist.
-            using StreamWriter writer = File.AppendText(logFilePath);
-            {
-                // Write message to file
-                writer.Write(
-                    $"\n[{DateTime.UtcNow}]\n" +
-                    $"{logMessage}");
-            }
+            // Append log message with a timestamp to the log file
+            File.AppendAllText(
+                logFilePath, 
+                $"[{DateTime.UtcNow}]\n" +
+                $"{logMessage}");
+        }
+
+        /// <summary>
+        /// Logs the <see cref="string"/> parameter value asynchronously
+        /// to the logging file in <see cref="logFilePath"/>
+        /// </summary>
+        /// <param name="logMessage"></param>
+        private static async Task WriteLogAsync(string logMessage)
+        {
+            // Append log message with a timestamp to the log file asynchronously
+            await File.AppendAllTextAsync(
+                logFilePath,
+                $"[{DateTime.UtcNow}]\n" +
+                $"{logMessage}");
         }
     }
 }
