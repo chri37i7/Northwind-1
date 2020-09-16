@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0-rc.1.20451.14" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\NT.Utilities\NT.Utilities.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Threading.Tasks;
 using NT.Utilities;
@@ -26,7 +27,7 @@ namespace NT.Logging
         /// </summary>
         private static void Configure()
         {    
-            logFilePath = $"{Directory.GetCurrentDirectory()}/log.txt";
+            logFilePath = ConfigurationManager.AppSettings["LogFilePath"].ToString();
         }
 
         /// <summary>

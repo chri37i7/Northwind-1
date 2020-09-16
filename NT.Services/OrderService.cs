@@ -18,7 +18,7 @@ namespace NT.Services
         public virtual async Task<List<Orders>> GetAllOrdersAsync()
         {
             // Call the web API
-            string json = await CallWebApiAsync("http://10.143.74.234:5000/order/all");
+            string json = await CallWebApiAsync("http://10.143.74.234:500/order/all");
 
             // Deserialize the JSON data into an object list
             List<Orders> orderData = JsonConvert.DeserializeObject<List<Orders>>(json);
