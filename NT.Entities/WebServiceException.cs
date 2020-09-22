@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace NT.Entities
 {
+    /// <summary>
+    /// Exception for when an error occurs in a webservice
+    /// </summary>
     [Serializable]
     public class WebServiceException : Exception
     {

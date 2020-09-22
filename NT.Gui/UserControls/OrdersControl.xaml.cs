@@ -14,19 +14,24 @@ namespace NT.Gui.UserControls
     /// </summary>
     public partial class OrdersControl : UserControl
     {
+        #region Fields
         private readonly OrderViewModel viewModel;
         private bool isLoaded;
+        #endregion
 
+        #region Constructor
         public OrdersControl()
         {
             InitializeComponent();
 
             // Initialize the viewModel
             viewModel = DataContext as OrderViewModel;
-        }
+        } 
+        #endregion
 
+        #region Event Handlers
         /// <summary>
-        /// Initializes the viewModel
+        /// Initializes the viewModel when the view has been loaded, and prevents reinitialization
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -52,6 +57,7 @@ namespace NT.Gui.UserControls
                 // Log Exception
                 await Logger.LogAsync(ex);
             }
-        }
+        } 
+        #endregion
     }
 }

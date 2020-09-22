@@ -9,6 +9,11 @@ namespace NT.DataAccess.Repositories
 {
     public class OrderRepository : RepositoryBase<Orders>
     {
+        /// <summary>
+        /// Override to include the customers, and orderdetails of an order
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<Orders>> GetByIdAsync(string customerId)
         {
             return await context.Set<Orders>()
@@ -18,6 +23,10 @@ namespace NT.DataAccess.Repositories
                 .ToListAsync();
         }
 
+        /// <summary>
+        /// Override to include the customers, and orderdetails of orders
+        /// </summary>
+        /// <returns></returns>
         public override async Task<IEnumerable<Orders>> GetAllAsync()
         {
             return await context.Set<Orders>()

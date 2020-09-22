@@ -27,6 +27,7 @@ namespace NT.Logging
         /// </summary>
         private static void Configure()
         {    
+            // Retrives the logging file path from the configuration file
             logFilePath = ConfigurationManager.AppSettings["LogFilePath"].ToString();
         }
 

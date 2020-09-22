@@ -13,19 +13,24 @@ namespace NT.Gui.UserControls
     /// </summary>
     public partial class ProductsControl : UserControl
     {
+        #region Fields
         private readonly ProductViewModel viewModel;
         private bool isLoaded;
+        #endregion
 
+        #region Constructor
         public ProductsControl()
         {
             InitializeComponent();
 
             // Initialize the viewModel
             viewModel = DataContext as ProductViewModel;
-        }
+        } 
+        #endregion
 
+        #region Event Handlers
         /// <summary>
-        /// Initializes the viewModel
+        /// Initializes the viewModel when the view has been loaded, and prevents reinitialization
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -51,6 +56,7 @@ namespace NT.Gui.UserControls
                 // Log Exception
                 await Logger.LogAsync(ex);
             }
-        }
+        } 
+        #endregion
     }
 }
